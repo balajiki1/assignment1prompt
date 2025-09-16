@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Persona Prompt Pattern in NLP – Gaming Edition</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero::before {
+            content: "🎮🎲🕹️⚔️🛡️🏰";
+            position: absolute;
+            top: -20px;
+            left: -100px;
+            font-size: 60px;
+            opacity: 0.1;
+            animation: float 20s linear infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes float {
+            0% { transform: translateX(-100px); }
+            100% { transform: translateX(100vw); }
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: pulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.02); }
+        }
+
+        .hero h2 {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hook-paragraph {
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .cta-button.secondary {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+        }
+
+        /* Main Content */
+        .main-content {
+            background: white;
+            margin: -50px auto 0;
+            border-radius: 20px 20px 0 0;
+            position: relative;
+            z-index: 2;
+            padding: 80px 0 40px;
+        }
+
+        .section {
+            padding: 60px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section h2 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 2px;
+        }
+
+        .section h3 {
+            font-size: 1.8em;
+            color: #34495e;
+            margin: 40px 0 20px;
+        }
+
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .concept-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #ff6b6b;
+            transition: transform 0.3s ease;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .concept-card h4 {
+            color: #2c3e50;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+
+        /* Examples Section */
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .example-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #dee2e6;
+        }
+
+        .example-card h4 {
+            color: #495057;
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .prompt-box {
+            background: #2d3748;
+            color: #68d391;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            border-left: 4px solid #68d391;
+        }
+
+        .response-box {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #4299e1;
+            margin: 15px 0;
+            font-style: italic;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comparison-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        /* Quiz Section */
+        .quiz-container {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 60px 0;
+            margin-top: 40px;
+        }
+
+        .quiz-question {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .quiz-question h4 {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .quiz-option {
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .quiz-option:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .quiz-option.selected {
+            border-color: #68d391;
+            background: rgba(104, 211, 145, 0.3);
+        }
+
+        .quiz-option.correct {
+            border-color: #68d391;
+            background: rgba(104, 211, 145, 0.5);
+        }
+
+        .quiz-option.incorrect {
+            border-color: #fc8181;
+            background: rgba(252, 129, 129, 0.5);
+        }
+
+        .quiz-controls {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .quiz-button {
+            background: #68d391;
+            color: #2d3748;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .quiz-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .quiz-results {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .explanation {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 0.9em;
+            display: none;
+        }
+
+        /* Exercise Section */
+        .exercise-container {
+            background: #f8f9fa;
+            padding: 60px 0;
+        }
+
+        .exercise-inputs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .exercise-input {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .exercise-input h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .exercise-textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            resize: vertical;
+        }
+
+        .exercise-textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .checklist {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin: 30px 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            font-size: 1.1em;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            color: #4ecdc4;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .download-button {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .download-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .glossary-item {
+            text-align: left;
+            margin: 15px 0;
+        }
+
+        .glossary-term {
+            font-weight: bold;
+            color: #4ecdc4;
+        }
+
+        .template-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            text-align: left;
+        }
+
+        .template-title {
+            font-weight: bold;
+            color: #4ecdc4;
+            margin-bottom: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5em;
+            }
+            
+            .concept-grid,
+            .examples-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .exercise-inputs {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <h1>🎮 Persona Prompt Pattern in NLP – Gaming Edition</h1>
+            <h2>Assign roles to AI to shape NPCs, Game Masters, and stories.</h2>
+            <div class="hook-paragraph">
+                In games, the same AI can feel like totally different characters just by changing who it thinks it is. That's the Persona Prompt Pattern: give the AI a role, and watch tone, decisions, and dialogue transform.
+            </div>
+            <div class="cta-buttons">
+                <a href="#part1" class="cta-button">Start Reading</a>
+                <a href="#quiz" class="cta-button secondary">Take Quiz</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="main-content">
+        <!-- Part 1 - Comprehensive Exploration -->
+        <section id="part1" class="section">
+            <div class="container">
+                <h2>📚 Part 1 — Comprehensive Exploration</h2>
+                
+                <div class="concept-grid">
+                    <div class="concept-card">
+                        <h4>What is the Persona Prompt Pattern?</h4>
+                        <p>The Persona Prompt Pattern assigns a specific identity to an AI (e.g., a strict Game Master, a friendly innkeeper, or a sarcastic space merchant). This role shapes the AI's tone, vocabulary, and behavior without changing the underlying model.</p>
+                    </div>
+                </div>
+
+                <h3>Core Concepts</h3>
+                <div class="concept-grid">
+                    <div class="concept-card">
+                        <h4>Core Concept 1 — Role Framing</h4>
+                        <p>When you tell the AI who it is, you implicitly set goals, style, and constraints.</p>
+                        <ul style="margin-top: 15px;">
+                            <li><strong>"You are a strict Game Master"</strong> → formal tone, rules-first, step-by-step guidance.</li>
+                            <li><strong>"You are a friendly mentor NPC"</strong> → welcoming tone, hints, and positive reinforcement.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h4>Core Concept 2 — Consistent World-Building</h4>
+                        <p>Once a persona is set, the AI stays in character, which keeps dialogue and actions consistent with your game's lore. That consistency boosts immersion and makes encounters feel handcrafted.</p>
+                    </div>
+                </div>
+
+                <h3>Why it Matters</h3>
+                <div class="concept-grid">
+                    <div class="concept-card" style="border-left-color: #4ecdc4;">
+                        <h4>🎯 Relevance</h4>
+                        <p>Responses match the player's expectations of that character.</p>
+                    </div>
+                    
+                    <div class="concept-card" style="border-left-color: #45b7d1;">
+                        <h4>🎭 Engagement</h4>
+                        <p>Persona-driven dialogue feels alive and memorable.</p>
+                    </div>
+                    
+                    <div class="concept-card" style="border-left-color: #96ceb4;">
+                        <h4>⚡ Efficiency</h4>
+                        <p>You don't have to re-explain tone or rules each time—one role prompt does the heavy lifting.</p>
+                    </div>
+                </div>
+
+                <div style="background: #e8f5e8; padding: 20px; border-radius: 10px; margin: 30px 0;">
+                    <strong>💡 Tip:</strong> Personas reduce repeated instructions. Set the role once; reuse it across scenes.
+                </div>
+
+                <h3>Real-World Significance</h3>
+                <p style="font-size: 1.1em; line-height: 1.8;">Narrative tools and tabletop assistants (e.g., AI-driven D&D bots or story engines) use persona prompts to create reactive worlds where NPCs behave differently, remember the fiction, and adapt to player choices in believable ways.</p>
+            </div>
+        </section>
+
+        <!-- Part 2 - Examples -->
+        <section id="part2" class="section">
+            <div class="container">
+                <h2>🧩 Part 2 — Demonstrating the Pattern with Examples</h2>
+                
+                <h3>Scenario</h3>
+                <p style="font-size: 1.1em; margin-bottom: 40px;">You're designing a fantasy RPG. Players can choose between two AI-driven Game Masters (GMs) for different experiences.</p>
+
+                <div class="examples-grid">
+                    <div class="example-card">
+                        <h4>🎲 Prompt 1 — Strict Game Master</h4>
+                        <div class="prompt-box">
+                            "You are a traditional Game Master. Follow the rulebooks closely, describe combat step by step, enforce checks and resource usage, and avoid spoilers or hints unless requested."
+                        </div>
+                        
+                        <strong>Sample Response:</strong>
+                        <div class="response-box">
+                            "Round 1 begins. The goblin rolls +4 to hit against your AC 15… Miss. Your turn: declare movement and action. If you cast a spell, specify components and slot."
+                        </div>
+                        
+                        <p><strong>Strengths:</strong> Fair, predictable, authentic mechanics.</p>
+                        <p><strong>Trade-offs:</strong> Can feel rigid; less cinematic flavor.</p>
+                    </div>
+
+                    <div class="example-card">
+                        <h4>🎭 Prompt 2 — Creative Storyteller</h4>
+                        <div class="prompt-box">
+                            "You are an imaginative narrator. Keep gameplay flowing while adding colorful descriptions, dramatic stakes, and cinematic moments. Offer gentle, optional hints."
+                        </div>
+                        
+                        <strong>Sample Response:</strong>
+                        <div class="response-box">
+                            "The goblin's dagger whistles past your cloak as rain drums the ruined archway. A glint—a loose lantern chain. Take it? Or press the attack while the goblin staggers?"
+                        </div>
+                        
+                        <p><strong>Strengths:</strong> Immersive, surprising, great for narrative play.</p>
+                        <p><strong>Trade-offs:</strong> May bend mechanics for pacing; needs occasional grounding.</p>
+                    </div>
+                </div>
+
+                <h3>Side-by-Side Analysis</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Strict GM</th>
+                            <th>Creative Storyteller</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Tone</strong></td>
+                            <td>Formal, rule-centric</td>
+                            <td>Cinematic, descriptive</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Gameplay</strong></td>
+                            <td>Balanced encounters, clear checks, resource tracking</td>
+                            <td>Fast pacing, flavorful options, dramatic twists</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Best For</strong></td>
+                            <td>Players wanting authentic system feel</td>
+                            <td>Players wanting story-first experiences</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Risks & Mitigations</strong></td>
+                            <td>Too rigid → Add small "flavor beats" each round</td>
+                            <td>Too loose → Anchor key rulings with brief mechanics</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Part 3 - Achievement -->
+        <section id="part3" class="section" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef); text-align: center;">
+            <div class="container">
+                <h2>🏅 Part 3 — Two Presentation Formats</h2>
+                <p style="font-size: 1.2em; margin-bottom: 20px;">You're viewing <strong>Format 2: This Website</strong> — a visual, interactive summary with quiz and a hands-on exercise.</p>
+                <p style="font-size: 1.1em; margin-bottom: 30px;"><strong>Format 1: Video</strong> — A narrated explainer covering definition, concepts, examples, and analysis (already created separately).</p>
+                <div style="background: #d4edda; color: #155724; padding: 20px; border-radius: 10px; display: inline-block;">
+                    <strong>🎉 Achievement: ✅ Two Formats Completed</strong>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Quiz Section -->
+    <section id="quiz" class="quiz-container">
+        <div class="container">
+            <h2>🧠 Part 4 — Quiz & Exercise</h2>
+            
+            <h3 style="text-align: center; margin-bottom: 20px;">Interactive Quiz (3 Questions)</h3>
+            <p style="text-align: center; margin-bottom: 40px;">Choose the best answer for each question. Click Check Answers to see which are correct and why. Your score will appear below. You can Reset Quiz to try again.</p>
+
+            <div class="quiz-question" data-question="1">
+                <h4>Q1. What does the Persona Prompt Pattern do?</h4>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-answer="A">A) Changes the model temperature</div>
+                    <div class="quiz-option" data-answer="B">B) Assigns a role/identity to the AI</div>
+                    <div class="quiz-option" data-answer="C">C) Speeds up rendering</div>
+                    <div class="quiz-option" data-answer="D">D) Randomizes NPC lines</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct Answer: B</strong><br>
+                    Explanation: Assigning a role guides tone, content, and behavior.
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="2">
+                <h4>Q2. Which is NOT a benefit of persona prompts in games?</h4>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-answer="A">A) Immersion</div>
+                    <div class="quiz-option" data-answer="B">B) Consistency</div>
+                    <div class="quiz-option" data-answer="C">C) Faster 3D rendering</div>
+                    <div class="quiz-option" data-answer="D">D) Dynamic storytelling</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct Answer: C</strong><br>
+                    Explanation: Persona prompts don't affect graphics performance.
+                </div>
+            </div>
+
+            <div class="quiz-question" data-question="3">
+                <h4>Q3. True or False: One AI can act like two NPCs using persona prompts.</h4>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-answer="A">A) True</div>
+                    <div class="quiz-option" data-answer="B">B) False</div>
+                </div>
+                <div class="explanation">
+                    <strong>Correct Answer: A</strong><br>
+                    Explanation: Different personas produce distinct behaviors.
+                </div>
+            </div>
+
+            <div class="quiz-controls">
+                <button class="quiz-button" id="checkAnswers">Check Answers</button>
+                <button class="quiz-button" id="resetQuiz">Reset Quiz</button>
+            </div>
+
+            <div class="quiz-results" id="quizResults" style="display: none;"></div>
+        </div>
+    </section>
+
+    <!-- Exercise Section -->
+    <section id="exercise" class="exercise-container">
+        <div class="container">
+            <h2>🚀 Exercise — Craft & Compare (Hands-On)</h2>
+            
+            <p style="text-align: center; font-size: 1.1em; margin-bottom: 30px;">Create two prompts for a sci-fi RPG:</p>
+
+            <div class="exercise-inputs">
+                <div class="exercise-input">
+                    <h4>🛸 Strict Spaceship Commander NPC</h4>
+                    <p style="margin-bottom: 15px; font-size: 0.95em;">Enforces protocols, prioritizes mission objectives, cites ship systems/checklists.</p>
+                    <p style="margin-bottom: 15px; font-size: 0.9em; font-style: italic;">Example starter: "You are a by-the-book starship commander. Enforce docking procedures, require security clearances, and demand concise status reports."</p>
+                    <textarea class="exercise-textarea" id="commanderPrompt" placeholder="Write your strict spaceship commander prompt here..."></textarea>
+                </div>
+
+                <div class="exercise-input">
+                    <h4>👽 Quirky Alien Merchant NPC</h4>
+                    <p style="margin-bottom: 15px; font-size: 0.95em;">Witty or eccentric tone, offers strange items, negotiates playfully.</p>
+                    <p style="margin-bottom: 15px; font-size: 0.9em; font-style: italic;">Example starter: "You are a quirky alien merchant with rare curios. Haggle with humor, drop mysterious hints, and upsell with odd bundles."</p>
+                    <textarea class="exercise-textarea" id="merchantPrompt" placeholder="Write your quirky alien merchant prompt here..."></textarea>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h4>📝 What to observe in your prompts:</h4>
+                <p style="margin-bottom: 20px;">Note three differences you observe in responses: role clarity, tone consistency, player guidance. Tick the checklist when you see each quality. Your notes and ticks will be saved locally (no uploads).</p>
+                
+                <div class="checklist-item">
+                    <input type="checkbox" id="roleClarity">
+                    <label for="roleClarity">Role clarity - Each persona has a distinct identity and purpose</label>
+                </div>
+                
+                <div class="checklist-item">
+                    <input type="checkbox" id="toneConsistency">
+                    <label for="toneConsistency">Tone consistency - Language style matches the character role</label>
+                </div>
+                
+                <div class="checklist-item">
+                    <input type="checkbox" id="playerGuidance">
+                    <label for="playerGuidance">Player guidance - Clear expectations for interaction</label>
+                </div>
+                
+                <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin-top: 20px;">
+                    <strong>💡 Tip:</strong> Add a one-line world rule to each persona (e.g., 'Always log actions to the bridge computer.') to keep them on track.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>📋 Mini-Glossary</h4>
+                    <div class="glossary-item">
+                        <span class="glossary-term">Persona:</span> The role/identity assigned to the AI (e.g., "grumpy guard").
+                    </div>
+                    <div class="glossary-item">
+                        <span class="glossary-term">Framing:</span> The initial instruction that sets expectations and boundaries.
+                    </div>
+                    <div class="glossary-item">
+                        <span class="glossary-term">Style anchors:</span> Short phrases that keep output consistent (e.g., "concise," "gentle," "by-the-book").
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>🎮 Quick Persona Templates</h4>
+                    <div class="template-item">
+                        <div class="template-title">Guard (Checkpoint):</div>
+                        "You are a stern city guard. Prioritize security, ask for papers, and offer lawful options only."
+                    </div>
+                    <div class="template-item">
+                        <div class="template-title">Innkeeper (Rumors):</div>
+                        "You are a warm innkeeper. Share rumors, suggest safe choices, and offer supplies honestly."
+                    </div>
+                    <div class="template-item">
+                        <div class="template-title">Archivist (Lore):</div>
+                        "You are a meticulous archivist. Cite records, clarify timelines, and correct contradictions politely."
+                    </div>
+                </div>
+            </div>
+
+            <a href="#" class="download-button" id="downloadPDF">📄 Download PDF Summary</a>
+
+            <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid #34495e;">
+                <p><strong>Credits:</strong> Created by Kishore Balaji as part of "Teach a Prompt Pattern" Assignment.</p>
+                <p style="font-size: 0.9em; opacity: 0.8; margin-top: 20px;">
+                    <strong>Accessibility & Privacy:</strong> No external tracking. Keyboard-friendly. High-contrast mode supported. Your notes are saved only in your browser.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Quiz functionality
+        const correctAnswers = {
+            1: 'B',
+            2: 'C', 
+            3: 'A'
+        };
+
+        const scoreMessages = {
+            3: "Legendary! You've mastered the Persona Pattern. 🎉",
+            2: "Great work—level up with a quick review of the explanations. 👍",
+            1: "Keep exploring—try switching personas and compare outcomes. 📚",
+            0: "Keep exploring—try switching personas and compare outcomes. 📚"
+        };
+
+        // Handle quiz option selection
+        document.querySelectorAll('.quiz-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const question = this.closest('.quiz-question');
+                question.querySelectorAll('.quiz-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                this.classList.add('selected');
+            });
+        });
+
+        // Check answers functionality
+        document.getElementById('checkAnswers').addEventListener('click', function() {
+            let score = 0;
+            
+            document.querySelectorAll('.quiz-question').forEach(question => {
+                const questionNum = question.dataset.question;
+                const selectedOption = question.querySelector('.quiz-option.selected');
+                const explanation = question.querySelector('.explanation');
+                
+                if (selectedOption) {
+                    const answer = selectedOption.dataset.answer;
+                    if (answer === correctAnswers[questionNum]) {
+                        selectedOption.classList.add('correct');
+                        score++;
+                    } else {
+                        selectedOption.classList.add('incorrect');
+                        // Also highlight the correct answer
+                        const correctOption = question.querySelector(`[data-answer="${correctAnswers[questionNum]}"]`);
+                        correctOption.classList.add('correct');
+                    }
+                    explanation.style.display = 'block';
+                }
+            });
+
+            // Show results
+            const resultsDiv = document.getElementById('quizResults');
+            resultsDiv.innerHTML = `
+                <h3>Your Score: ${score}/3</h3>
+                <p>${scoreMessages[score]}</p>
+            `;
+            resultsDiv.style.display = 'block';
+            
+            // Disable check button
+            this.disabled = true;
+        });
+
+        // Reset quiz functionality
+        document.getElementById('resetQuiz').addEventListener('click', function() {
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            document.querySelectorAll('.explanation').forEach(exp => {
+                exp.style.display = 'none';
+            });
+            
+            document.getElementById('quizResults').style.display = 'none';
+            document.getElementById('checkAnswers').disabled = false;
+        });
+
+        // Save exercise data locally
+        function saveExerciseData() {
+            const data = {
+                commanderPrompt: document.getElementById('commanderPrompt').value,
+                merchantPrompt: document.getElementById('merchantPrompt').value,
+                roleClarity: document.getElementById('roleClarity').checked,
+                toneConsistency: document.getElementById('toneConsistency').checked,
+                playerGuidance: document.getElementById('playerGuidance').checked
+            };
+            localStorage.setItem('personaPromptExercise', JSON.stringify(data));
+        }
+
+        // Load exercise data
+        function loadExerciseData() {
+            const saved = localStorage.getItem('personaPromptExercise');
+            if (saved) {
+                const data = JSON.parse(saved);
+                document.getElementById('commanderPrompt').value = data.commanderPrompt || '';
+                document.getElementById('merchantPrompt').value = data.merchantPrompt || '';
+                document.getElementById('roleClarity').checked = data.roleClarity || false;
+                document.getElementById('toneConsistency').checked = data.toneConsistency || false;
+                document.getElementById('playerGuidance').checked = data.playerGuidance || false;
+            }
+        }
+
+        // Add event listeners for saving
+        document.getElementById('commanderPrompt').addEventListener('input', saveExerciseData);
+        document.getElementById('merchantPrompt').addEventListener('input', saveExerciseData);
+        document.getElementById('roleClarity').addEventListener('change', saveExerciseData);
+        document.getElementById('toneConsistency').addEventListener('change', saveExerciseData);
+        document.getElementById('playerGuidance').addEventListener('change', saveExerciseData);
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // PDF download placeholder
+        document.getElementById('downloadPDF').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('PDF download functionality would be implemented here. For now, you can print this page or save it as PDF using your browser.');
+        });
+
+        // Load saved data on page load
+        window.addEventListener('load', loadExerciseData);
+
+        // Add keyboard accessibility
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                if (e.target.classList.contains('quiz-option')) {
+                    e.preventDefault();
+                    e.target.click();
+                }
+            }
+        });
+
+        // Add focus styles for accessibility
+        document.querySelectorAll('.quiz-option, .cta-button, .quiz-button').forEach(element => {
+            element.setAttribute('tabindex', '0');
+        });
+    </script>
+</body>
+</html>
